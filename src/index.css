@@ -1,0 +1,139 @@
+@import url('https://fonts.googleapis.com/css2?family=Jersey+10&family=Pixelify+Sans:wght@400..500&display=swap ');
+@import "tailwindcss";
+@plugin "daisyui";
+
+
+@theme{
+  --font-pixel: "Pixelify Sans", sans-serif;
+  --color-pertama : #CCD0CF;
+  --color-kedua : #9BA8AB;
+  --color-ketiga : #4A5C6A;
+  --color-keempat : #253745;
+  --color-kelima : #11212D;
+  --color-keenam : #06141B;
+
+  --animate-infinite-scroll: infinite-scroll 25s linear infinite;
+
+  @keyframes infinite-scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-100%); }
+  }
+}
+
+.bg-portfolio-main {
+  background-color: var(--color-keenam);
+  background-image: 
+    radial-gradient(circle at 0% 0%, rgba(74, 92, 106, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 100% 100%, rgba(17, 33, 45, 0.2) 0%, transparent 50%);
+}
+
+.liquid-blob {
+  position: absolute; /* Relative terhadap parent fixed */
+  filter: blur(100px); /* Blur lebih tinggi untuk kesan "liquid" */
+  opacity: 0.5;
+  border-radius: 50%;
+  mix-blend-mode: screen; /* Membuat warna bercampur lebih cantik dengan background gelap */
+  animation: blob-move 20s infinite alternate;
+}
+
+/* Animasi opsional agar blob terasa "hidup" atau bergerak pelan */
+@keyframes blob-move {
+  from { transform: translate(0, 0) scale(1); }
+  to { transform: translate(30px, -50px) scale(1.1); }
+}
+
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif, 'Pixelify Sans';
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: white;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  /* display: flex; */
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeDown {
+  from {
+    opacity: 0;
+    transform: translateY(-24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes growLine {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.animate-fade-up {
+  animation: fadeUp 0.8s ease-out forwards;
+}
+
+.animate-fade-down {
+  animation: fadeDown 0.8s ease-out forwards;
+}
+
+.animate-line {
+  transform-origin: left;
+  animation: growLine 1s ease-out forwards;
+}
+  
