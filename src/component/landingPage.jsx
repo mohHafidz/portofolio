@@ -8,6 +8,7 @@ import {
     PenTool,
     MapPin
 } from 'lucide-react';
+import profileImage from '../assets/poto2.png'
 
 
 function LandingPage() {
@@ -58,7 +59,7 @@ function LandingPage() {
 
                 {/* PROFILE IMAGE */}
                 <img
-                    src="./src/assets/poto2.png"
+                    src={profileImage}
                     alt="Profile"
                     className="w-36 h-36 object-cover mask mask-squircle shadow-xl bg-kedua"
                 />
