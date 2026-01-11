@@ -1,3 +1,16 @@
+import img1 from '../assets/output_no_bg(1).png'
+import img2 from '../assets/output_no_bg(2).png'
+import img4 from '../assets/output_no_bg(4).png'
+import img5 from '../assets/output_no_bg(5).png'
+import img6 from '../assets/output_no_bg(6).png'
+import img7 from '../assets/output_no_bg(7).png'
+import img8 from '../assets/output_no_bg(8).png'
+import img9 from '../assets/output_no_bg(9).png'
+import img11 from '../assets/output_no_bg(11).png'
+
+// Kemudian Anda bisa memasukkannya kembali ke dalam array untuk digunakan
+const items = [img1, img2, img4, img5, img6, img7, img8, img9, img11];
+
 function Skill() {
 
     const skills = [
@@ -12,20 +25,6 @@ function Skill() {
         "Android Development Fundamentals",
         // "React",
         // "Tailwind CSS"
-    ]
-
-
-    const items = [
-        "output_no_bg(1).png",
-        "output_no_bg(2).png",
-        // "output_no_bg(3).png",
-        "output_no_bg(4).png",
-        "output_no_bg(5).png",
-        "output_no_bg(6).png",
-        "output_no_bg(7).png",
-        "output_no_bg(8).png",
-        "output_no_bg(9).png",
-        "output_no_bg(11).png",
     ]
 
 
@@ -102,7 +101,7 @@ function Skill() {
                   "
                                 >
                                     <img
-                                        src={`./src/assets/${item}`}
+                                        src={item}
                                         alt=""
                                         className="w-10 h-10 object-contain"
                                     />
