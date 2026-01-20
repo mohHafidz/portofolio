@@ -1,3 +1,7 @@
+import { useEffect } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
 import './App.css'
 import Dock from './component/dock.jsx'
 import LandingPage from './component/landingPage.jsx'
@@ -5,7 +9,13 @@ import Skill from './component/skill.jsx'
 import AboutUs from './component/aboutUs.jsx'
 import Proyect from './component/proyect.jsx'
 
+gsap.registerPlugin(ScrollTrigger);
+
 function App() {
+  useEffect(() => {
+    // Pastikan ScrollTrigger membaca scroller yang benar setelah mount
+    ScrollTrigger.refresh();
+  }, []);
   return (
     <>
       {/* FIXED BACKGROUND (ONCE) */}
@@ -28,6 +38,7 @@ function App() {
       </div>
       {/* SCROLL CONTAINER */}
       <div
+      id="scroll-root"
         className="
           h-screen
           overflow-y-scroll

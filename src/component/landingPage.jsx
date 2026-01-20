@@ -3,6 +3,7 @@ import {
     Github,
     Linkedin,
     Instagram,
+    Mail,
     ChevronDown,
     Smartphone,
     PenTool,
@@ -53,7 +54,7 @@ function LandingPage() {
                     </SocialButton>
 
                     <SocialButton href="https://instagram.com/username">
-                        <Instagram className="w-5 h-5" />
+                        <Mail className="w-5 h-5" />
                     </SocialButton>
                 </div>
 

@@ -16,7 +16,7 @@ const filters = [
 // import React from 'react';
 // import {  } from 'lucide-react';
 
-function ProjectCard({ id, image, title, description, tech, link, challenge, start, end, client, industry, platform, gallery }) {
+function ProjectCard({ id, image, title, description, tech, link, challenge, start, end, client, industry, platform, gallery, position }) {
     // Gunakan ID unik untuk setiap modal berdasarkan prop 'id' atau 'title'
     const modalId = `modal_${id || title.replace(/\s+/g, '_')}`;
 
@@ -89,7 +89,7 @@ function ProjectCard({ id, image, title, description, tech, link, challenge, sta
                             </h1>
                             <div className="flex flex-wrap gap-6 text-sm text-white/50">
                                 <div className="flex items-center gap-2">
-                                    <User size={16} /> <span>Lead Product Designer</span>
+                                    <User size={16} /> <span>{position}</span>
                                 </div>
                                 <div className="flex items-center gap-2">
                                     <Calendar size={16} /> <span>{start} - {end}</span>
@@ -126,13 +126,13 @@ function ProjectCard({ id, image, title, description, tech, link, challenge, sta
                                 <h3 className="text-sm font-bold text-white mb-6">Project Summary</h3>
                                 <div className="space-y-4 text-xs text-white/60">
                                     <div className="flex justify-between border-b border-white/5 pb-3">
-                                        <span>Client</span> <span className="text-white">{client}</span>
+                                        <span>Client</span> <span className="text-white text-right">{client}</span>
                                     </div>
                                     <div className="flex justify-between border-b border-white/5 pb-3">
-                                        <span>Industry</span> <span className="text-white">{industry}</span>
+                                        <span>Industry</span> <span className="text-white text-right">{industry}</span>
                                     </div>
                                     <div className="flex justify-between">
-                                        <span>Platform</span> <span className="text-white">{platform}</span>
+                                        <span>Platform</span> <span className="text-white text-right">{platform}</span>
                                     </div>
                                 </div>
                             </div>
@@ -199,6 +199,50 @@ function ProjectCard({ id, image, title, description, tech, link, challenge, sta
     );
 }
 
+function ProjectCTA() {
+    return (
+        <section className="w-full flex justify-center px-4 mt-32 mb-34">
+            <div
+                className="
+                    relative w-full max-w-6xl
+                    rounded-2xl border border-white/10
+                    
+                    backdrop-blur-xl
+                    px-8 py-16 md:px-20
+                    text-center
+                    shadow-[0_0_80px_rgba(0,0,0,0.6)]
+                "
+            >
+                <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                    Have a project in mind?
+                </h2>
+
+                <p className="max-w-2xl mx-auto text-sm md:text-base text-white/60 leading-relaxed mb-10">
+                    Let’s build something extraordinary together using modern design
+                    principles and cutting-edge technology.
+                </p>
+
+                <a
+                    href="https://wa.me/6285156384530?text=Hi%20Hafidz%2C%20I%20would%20like%20to%20discuss%20a%20potential%20project." target="_blank" rel="noopener noreferrer"
+                    className="
+                        inline-flex items-center justify-center
+                        px-8 py-4
+                        rounded-xl
+                        bg-white/10 border border-white/20
+                        !text-white font-medium
+                        transition-all duration-300
+                        hover:bg-white/20 hover:-translate-y-0.5
+                        hover:shadow-xl
+                    "
+                >
+                    Start a Conversation
+                </a>
+            </div>
+        </section>
+    );
+}
+
+
 
 function Proyect() {
     const [projects, setProjects] = useState([])
@@ -228,6 +272,7 @@ function Proyect() {
                     challenge: d.Challenge ?? "",
                     client: d.Client ?? "",
                     industry: d.Industry ?? "",
+                    position: d.Possition ?? "",
                     gallery: Array.isArray(d.Galery) ? d.Galery : [],
                 }
             })
@@ -278,7 +323,7 @@ function Proyect() {
             {loading ? (
                 <p className="text-white/60">Loading projects...</p>
             ) : (
-                <div className="w-full max-w-6xl grid gap-8 sm:grid-cols-2 lg:grid-cols-3 mb-70">
+                <div className="w-full max-w-6xl grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
                     {filteredProjects.map((project, index) => (
                         <ProjectCard
                             link={index}
@@ -294,11 +339,14 @@ function Proyect() {
                             industry={project.industry}
                             platform={project.platform}
                             gallery={project.gallery}
+                            position={project.position}
                         />
 
                     ))}
                 </div>
             )}
+
+            <ProjectCTA />
         </section>
     )
 }
