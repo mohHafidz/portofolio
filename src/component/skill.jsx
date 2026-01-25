@@ -29,7 +29,7 @@ function Skill() {
 
 
     return (
-        <section className="w-full flex flex-col items-center py-28 snap-start snap-none ">
+        <section className="w-full flex flex-col items-center py-28 snap-start snap-none mb-36">
 
             {/* SECTION HEADER */}
             <div className="max-w-2xl text-center mb-10 px-4">
@@ -87,7 +87,7 @@ function Skill() {
         `}</style>
 
                 {/* Marquee */}
-                <div className="animate-loop gap-6 mb-80">
+                <div className="animate-loop gap-6 ">
 
                     {[...Array(2)].map((_, idx) => (
                         <div key={idx} className="flex gap-6">

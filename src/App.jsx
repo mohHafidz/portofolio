@@ -48,7 +48,7 @@ function App() {
           flex flex-col
         "
       >
-        <Dock />
+        {/* <Dock /> */}
 
         {/* LANDING */}
         <section className="snap-start h-screen">
