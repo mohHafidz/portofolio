@@ -86,7 +86,7 @@ function AboutUs() {
   return (
     <section
       ref={sectionRef}
-      className="w-full flex flex-col items-center py-20 md:py-28 overflow-hidden min-h-[100vh] snap-start snap-none relative mb-36"
+      className="w-full flex flex-col items-center py-20 md:py-28 overflow-hidden snap-start snap-none relative mb-36"
     >
       <div className="max-w-2xl text-center mb-16 md:mb-26 px-4 text-white">
         <h2 className="text-3xl md:text-4xl font-semibold mb-4">Professional Journey</h2>

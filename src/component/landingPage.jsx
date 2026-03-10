@@ -9,7 +9,7 @@ import {
     MapPin
 } from 'lucide-react';
 
-import profileImage from '../assets/poto2.png';
+import profileImage from '../assets/profile.jpeg';
 
 function LandingPage() {
     return (
@@ -46,7 +46,7 @@ function LandingPage() {
                 className="
                     glass
                     flex flex-col md:flex-row
-                    items-center md:items-start
+                    items-center md:place-items-center
                     gap-6 md:gap-8
                     p-6 md:p-8
                     shadow-2xl
@@ -60,15 +60,15 @@ function LandingPage() {
                 {/* SOCIAL MEDIA */}
                 <div className="flex flex-row md:flex-col gap-4">
                     <SocialButton href="https://github.com/username">
-                        <Github className="w-5 h-5" />
+                        <Github className="w-5 h-5 " color='white' />
                     </SocialButton>
 
-                    <SocialButton href="https://linkedin.com/in/username">
-                        <Linkedin className="w-5 h-5" />
+                    <SocialButton href="https://www.linkedin.com/in/hafidz22">
+                        <Linkedin className="w-5 h-5" color='white' />
                     </SocialButton>
 
-                    <SocialButton href="mailto:email@example.com">
-                        <Mail className="w-5 h-5" />
+                    <SocialButton href="mailto:muhammad22.hafidz22@gmail.com">
+                        <Mail className="w-5 h-5" color='white' />
                     </SocialButton>
                 </div>
 
@@ -79,7 +79,7 @@ function LandingPage() {
                     className="
                         w-28 h-28
                         sm:w-32 sm:h-32
-                        md:w-36 md:h-36
+                        md:w-46 md:h-46
                         object-cover
                         mask mask-squircle
                         shadow-xl

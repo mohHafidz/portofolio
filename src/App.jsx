@@ -38,14 +38,13 @@ function App() {
       </div>
       {/* SCROLL CONTAINER */}
       <div
-      id="scroll-root"
+        id="scroll-root"
         className="
           h-screen
-          overflow-y-scroll
-          scroll-smooth
-          snap-y
-          snap-mandatory
-          flex flex-col
+    overflow-y-scroll
+    snap-y
+    snap-proximity
+    flex flex-col
         "
       >
         {/* <Dock /> */}
