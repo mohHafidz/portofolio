@@ -45,11 +45,11 @@ function LandingPage() {
             <div
                 className="
                     glass
+                    liquid-highlight
                     flex flex-col md:flex-row
                     items-center md:place-items-center
                     gap-6 md:gap-8
                     p-6 md:p-8
-                    shadow-2xl
                     border border-white/20
                     rounded-4xl
                     max-w-3xl

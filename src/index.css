@@ -136,4 +136,42 @@ h1 {
   transform-origin: left;
   animation: growLine 1s ease-out forwards;
 }
+
+/* Efek highlight liquid bergerak di dalam card */
+.liquid-highlight {
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 25px 50px -12px rgba(255, 255, 255, 0.05);
+}
+
+.liquid-highlight::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 50%);
+  animation: spotlight-move 8s infinite alternate ease-in-out;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.liquid-highlight > * {
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes spotlight-move {
+  0% {
+    transform: translate(0%, 0%);
+  }
+  50% {
+    transform: translate(25%, 25%);
+  }
+  100% {
+    transform: translate(50%, 0%);
+  }
+}
+
   
