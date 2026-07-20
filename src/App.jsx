@@ -106,6 +106,13 @@ function App() {
               return progress; // Biarkan user bebas scroll di dalam section ini
             }
 
+            // Cek apakah posisi scroll saat ini sudah tepat pada atau sangat dekat dengan titik snap 
+            // (misal setelah klik navigasi, atau berhenti tepat di snap point)
+            const closestPoint = snapPoints.find(p => Math.abs(p - currentScrollPx) <= 10);
+            if (closestPoint !== undefined) {
+              return closestPoint / maxScroll;
+            }
+
             // Jika di luar free scroll zone, jalankan auto-scroll (snap)
             if (self.direction === 1) { // Scroll ke bawah
               const nextPoint = snapPoints.find(p => p > currentScrollPx + 15);
