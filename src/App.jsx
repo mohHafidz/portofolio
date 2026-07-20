@@ -16,6 +16,7 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 function App() {
   const appRef = useRef(null);
+  const isNavigating = useRef(false);
   const [isLoading, setIsLoading] = useState(true);
   const [activeSection, setActiveSection] = useState(0);
 
@@ -71,6 +72,10 @@ function App() {
         },
         snap: {
           snapTo: (progress, self) => {
+            if (isNavigating.current) {
+              return progress;
+            }
+
             const sections = gsap.utils.toArray(".gsap-snap");
             const maxScroll = content.offsetHeight - scroller.offsetHeight;
 
@@ -108,7 +113,7 @@ function App() {
 
             // Cek apakah posisi scroll saat ini sudah tepat pada atau sangat dekat dengan titik snap 
             // (misal setelah klik navigasi, atau berhenti tepat di snap point)
-            const closestPoint = snapPoints.find(p => Math.abs(p - currentScrollPx) <= 10);
+            const closestPoint = snapPoints.find(p => Math.abs(p - currentScrollPx) <= 15);
             if (closestPoint !== undefined) {
               return closestPoint / maxScroll;
             }
@@ -137,10 +142,18 @@ function App() {
   const handleDotClick = (index) => {
     const sections = gsap.utils.toArray(".gsap-snap");
     if (sections[index]) {
+      isNavigating.current = true;
       gsap.to("#scroll-root", {
         scrollTo: sections[index],
         duration: 1,
-        ease: "power2.inOut"
+        ease: "power2.inOut",
+        onComplete: () => {
+          // Beri sedikit delay sebelum mengaktifkan kembali snapping
+          // untuk mencegah snap yang tidak disengaja setelah scroll terprogram selesai.
+          setTimeout(() => {
+            isNavigating.current = false;
+          }, 50);
+        }
       });
     }
   };
