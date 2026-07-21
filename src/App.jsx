@@ -24,6 +24,9 @@ function App() {
     // Hilangkan preloader setelah 1.5 detik
     const timer = setTimeout(() => {
       setIsLoading(false);
+      // Refresh ScrollTrigger setelah preloader hilang untuk memastikan
+      // semua perhitungan dimensi dan posisi scroll akurat.
+      ScrollTrigger.refresh();
     }, 1500);
     return () => clearTimeout(timer);
   }, []);
@@ -187,7 +190,6 @@ function App() {
         className="
           h-dvh
           overflow-y-scroll
-          scroll-smooth
           flex flex-col
         "
       >
