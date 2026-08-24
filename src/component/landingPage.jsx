@@ -6,7 +6,8 @@ import {
     ChevronDown,
     Smartphone,
     PenTool,
-    MapPin
+    MapPin,
+    FileText
 } from 'lucide-react';
 
 import profileImage from '../assets/profile.jpeg';
@@ -57,8 +58,8 @@ function LandingPage() {
                 "
             >
 
-                {/* SOCIAL MEDIA */}
-                <div className="flex flex-row md:flex-col gap-4">
+                {/* SOCIAL MEDIA & CV */}
+                <div className="flex flex-row md:flex-col items-center justify-center flex-wrap gap-4">
                     <SocialButton href="https://github.com/username">
                         <Github className="w-5 h-5 " color='white' />
                     </SocialButton>
@@ -69,6 +70,11 @@ function LandingPage() {
 
                     <SocialButton href="mailto:muhammad22.hafidz22@gmail.com">
                         <Mail className="w-5 h-5" color='white' />
+                    </SocialButton>
+
+                    {/* CV BUTTON */}
+                    <SocialButton href="/Muhammad_Hafidz-resume.pdf">
+                        <FileText className="w-5 h-5" color='white' />
                     </SocialButton>
                 </div>
 
@@ -157,6 +163,7 @@ const SocialButton = ({ href, children }) => (
         rel="noreferrer"
         className="
             btn btn-circle btn-outline
+            rounded-full
             bg-transparent
             hover:bg-transparent
             focus:bg-transparent
@@ -164,19 +171,25 @@ const SocialButton = ({ href, children }) => (
 
             border-white/40
             hover:border-white/60
+            
+            focus:outline-none
+            focus-visible:ring-2
+            focus-visible:ring-white/50
 
             relative overflow-hidden
+            isolation-isolate
             transition-all duration-300
             hover:scale-110
 
             before:absolute
             before:inset-0
+            before:rounded-full
             before:bg-white/10
             before:backdrop-blur-sm
-            before:translate-x-[-120%]
+            before:scale-0
             before:transition-transform
             before:duration-500
-            hover:before:translate-x-0
+            hover:before:scale-100
         "
     >
         {children}

@@ -70,7 +70,7 @@ function App() {
               currentIdx = idx;
             }
           });
-          
+
           setActiveSection(currentIdx);
         },
         snap: {
@@ -101,7 +101,7 @@ function App() {
                 // Beri buffer 15px dari atas dan bawah
                 const freeStart = secStart + 15;
                 const freeEnd = secStart + secHeight - viewportHeight - 15;
-                
+
                 // Jika user berada di tengah-tengah section panjang ini
                 if (currentScrollPx > freeStart && currentScrollPx < freeEnd) {
                   insideFreeScroll = true;
@@ -165,7 +165,7 @@ function App() {
     <div ref={appRef}>
       <Preloader isLoading={isLoading} />
       <DotNavigation activeSection={activeSection} onDotClick={handleDotClick} />
-      
+
       {/* FIXED BACKGROUND (ONCE) */}
       <div
         className="
