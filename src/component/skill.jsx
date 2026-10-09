@@ -49,9 +49,9 @@ function Skill() {
                     <div
                         key={i}
                         className="
-              flex items-center justify-center py-4 rounded-xl
+              flex items-center justify-center py-4 px-3 rounded-xl
               bg-white/10 backdrop-blur-md border border-white/20
-              text-sm font-medium text-white
+              text-sm font-medium text-white text-center
               transition-all duration-300
               hover:bg-white/20 hover:-translate-y-1
             "
@@ -62,7 +62,7 @@ function Skill() {
             </div>
 
             {/* EXPERTISE */}
-            <div className="w-170 max-w-6xl px-6 overflow-hidden relative ">
+            <div className="w-full max-w-6xl px-6 overflow-hidden relative">
 
                 <h3 className="text-lg font-semibold text-white mb-10 text-center">
                     Areas of Expertise

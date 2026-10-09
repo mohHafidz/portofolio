@@ -14,7 +14,7 @@ import profileImage from '../assets/profile.jpeg';
 
 function LandingPage() {
     return (
-        <div className="min-h-screen w-screen flex flex-col justify-center items-center text-white px-4 gap-10">
+        <div className="min-h-screen w-full flex flex-col justify-center items-center text-white px-4 gap-10">
 
             {/* TITLE */}
             <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold flex flex-row items-end gap-1 leading-none">
@@ -108,18 +108,19 @@ function LandingPage() {
                     <div
                         className="
                             flex flex-col sm:flex-row
+                            items-center md:items-start
                             gap-2 sm:gap-3
                             justify-center md:justify-start
                         "
                     >
-                        <div className="glass flex items-center gap-2 px-3 py-2 rounded-xl border border-white/20">
+                        <div className="glass flex items-center gap-2 px-3 py-2 rounded-xl border border-white/20 w-fit">
                             <Smartphone className="w-4 h-4 text-keenam" />
                             <span className="text-xs font-medium">
                                 Mobile Development (Flutter)
                             </span>
                         </div>
 
-                        <div className="glass flex items-center gap-2 px-3 py-2 rounded-xl border border-white/20">
+                        <div className="glass flex items-center gap-2 px-3 py-2 rounded-xl border border-white/20 w-fit">
                             <PenTool className="w-4 h-4 text-keenam" />
                             <span className="text-xs font-medium">
                                 UI / UX Design (Figma)

@@ -188,7 +188,7 @@ function App() {
         "
       />
       {/* 1. LIQUID BACKGROUND ELEMENTS (FIXED) */}
-      <div className="fixed inset-0 z-0 pointer-events-none">
+      <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
         {/* Blob 1: Top Left - Menggunakan warna ketiga (biru keabuan) */}
         <div className="liquid-blob bg-ketiga/20 w-[500px] h-[500px] -top-20 -left-20"></div>
 
@@ -204,6 +204,8 @@ function App() {
         className="
           h-dvh
           overflow-y-scroll
+          overflow-x-hidden
+          w-full
           flex flex-col
         "
       >
