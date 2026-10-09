@@ -1,4 +1,4 @@
-import { collection, getDocs, query, orderBy } from "firebase/firestore"
+import { collection, getDocs, query } from "firebase/firestore"
 import { db } from "../lib/firebase"
 
 export async function getProjects() {

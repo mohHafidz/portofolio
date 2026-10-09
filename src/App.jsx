@@ -32,19 +32,25 @@ function App() {
   }, []);
 
   useLayoutEffect(() => {
-    // Gunakan gsap.context untuk clean up yang aman di React
-    let ctx = gsap.context(() => {
+    const scroller = document.querySelector("#scroll-root");
+    const content = document.querySelector("#scroll-content");
+
+    if (!scroller || !content) return;
+
+    // Gunakan ResizeObserver agar ScrollTrigger SELALU update
+    // ketika gambar selesai loading atau layout berubah
+    const ro = new ResizeObserver(() => {
       ScrollTrigger.refresh();
+    });
+    ro.observe(content);
 
-      const scroller = document.querySelector("#scroll-root");
-      const content = document.querySelector("#scroll-content");
+    let mm = gsap.matchMedia(appRef);
 
-      // Gunakan ResizeObserver agar ScrollTrigger SELALU update
-      // ketika gambar selesai loading atau layout berubah
-      const ro = new ResizeObserver(() => {
-        ScrollTrigger.refresh();
-      });
-      ro.observe(content);
+    mm.add({
+      isDesktop: "(min-width: 768px)",
+      isMobile: "(max-width: 767px)"
+    }, (context) => {
+      const { isDesktop } = context.conditions;
 
       ScrollTrigger.create({
         scroller: scroller,
@@ -73,73 +79,81 @@ function App() {
 
           setActiveSection(currentIdx);
         },
-        snap: {
-          snapTo: (progress, self) => {
-            if (isNavigating.current) {
-              return progress;
-            }
+        // Fitur autoscroll (snapping) hanya diaktifkan di desktop, dinonaktifkan di mobile
+        ...(isDesktop ? {
+          snap: {
+            snapTo: (progress, self) => {
+              if (isNavigating.current) {
+                return progress;
+              }
 
-            const sections = gsap.utils.toArray(".gsap-snap");
-            const maxScroll = content.offsetHeight - scroller.offsetHeight;
+              const sections = gsap.utils.toArray(".gsap-snap");
+              const maxScroll = content.offsetHeight - scroller.offsetHeight;
 
-            if (maxScroll <= 0) return progress;
+              if (maxScroll <= 0) return progress;
 
-            const viewportHeight = scroller.offsetHeight;
-            const currentScrollPx = progress * maxScroll;
+              const viewportHeight = scroller.offsetHeight;
+              const currentScrollPx = progress * maxScroll;
 
-            // Kumpulkan titik snap menggunakan offsetTop (sangat presisi dan kebal dari bug scroll)
-            const snapPoints = sections.map(sec => sec.offsetTop);
+              // Kumpulkan titik snap menggunakan offsetTop (sangat presisi dan kebal dari bug scroll)
+              const snapPoints = sections.map(sec => sec.offsetTop);
 
-            // Deteksi jika user sedang scroll di dalam section yang tinggi (seperti Project)
-            let insideFreeScroll = false;
-            for (let i = 0; i < sections.length; i++) {
-              const sec = sections[i];
-              const secStart = sec.offsetTop;
-              const secHeight = sec.offsetHeight;
+              // Deteksi jika user sedang scroll di dalam section yang tinggi (seperti Project)
+              let insideFreeScroll = false;
+              for (let i = 0; i < sections.length; i++) {
+                const sec = sections[i];
+                const secStart = sec.offsetTop;
+                const secHeight = sec.offsetHeight;
 
-              if (secHeight > viewportHeight) {
-                // Beri buffer 15px dari atas dan bawah
-                const freeStart = secStart + 15;
-                const freeEnd = secStart + secHeight - viewportHeight - 15;
+                if (secHeight > viewportHeight) {
+                  // Beri buffer 15px dari atas dan bawah
+                  const freeStart = secStart + 15;
+                  const freeEnd = secStart + secHeight - viewportHeight - 15;
 
-                // Jika user berada di tengah-tengah section panjang ini
-                if (currentScrollPx > freeStart && currentScrollPx < freeEnd) {
-                  insideFreeScroll = true;
-                  break;
+                  // Jika user berada di tengah-tengah section panjang ini
+                  if (currentScrollPx > freeStart && currentScrollPx < freeEnd) {
+                    insideFreeScroll = true;
+                    break;
+                  }
                 }
               }
-            }
 
-            if (insideFreeScroll) {
-              return progress; // Biarkan user bebas scroll di dalam section ini
-            }
+              if (insideFreeScroll) {
+                return progress; // Biarkan user bebas scroll di dalam section ini
+              }
 
-            // Cek apakah posisi scroll saat ini sudah tepat pada atau sangat dekat dengan titik snap 
-            // (misal setelah klik navigasi, atau berhenti tepat di snap point)
-            const closestPoint = snapPoints.find(p => Math.abs(p - currentScrollPx) <= 15);
-            if (closestPoint !== undefined) {
-              return closestPoint / maxScroll;
-            }
+              // Cek apakah posisi scroll saat ini sudah tepat pada atau sangat dekat dengan titik snap 
+              // (misal setelah klik navigasi, atau berhenti tepat di snap point)
+              const closestPoint = snapPoints.find(p => Math.abs(p - currentScrollPx) <= 15);
+              if (closestPoint !== undefined) {
+                return closestPoint / maxScroll;
+              }
 
-            // Jika di luar free scroll zone, jalankan auto-scroll (snap)
-            if (self.direction === 1) { // Scroll ke bawah
-              const nextPoint = snapPoints.find(p => p > currentScrollPx + 15);
-              return nextPoint !== undefined ? (nextPoint / maxScroll) : progress;
-            } else if (self.direction === -1) { // Scroll ke atas
-              const prevPoint = [...snapPoints].reverse().find(p => p < currentScrollPx - 15);
-              return prevPoint !== undefined ? (prevPoint / maxScroll) : progress;
-            }
+              // Jika di luar free scroll zone, jalankan auto-scroll (snap)
+              if (self.direction === 1) { // Scroll ke bawah
+                const nextPoint = snapPoints.find(p => p > currentScrollPx + 15);
+                return nextPoint !== undefined ? (nextPoint / maxScroll) : progress;
+              } else if (self.direction === -1) { // Scroll ke atas
+                const prevPoint = [...snapPoints].reverse().find(p => p < currentScrollPx - 15);
+                return prevPoint !== undefined ? (prevPoint / maxScroll) : progress;
+              }
 
-            return progress;
-          },
-          duration: { min: 0.2, max: 0.5 },
-          delay: 0,
-          ease: "power2.out",
-        }
+              return progress;
+            },
+            duration: { min: 0.2, max: 0.5 },
+            delay: 0,
+            ease: "power2.out",
+          }
+        } : {})
       });
-    }, appRef);
+    });
 
-    return () => ctx.revert();
+    ScrollTrigger.refresh();
+
+    return () => {
+      ro.disconnect();
+      mm.revert();
+    };
   }, []);
 
   const handleDotClick = (index) => {

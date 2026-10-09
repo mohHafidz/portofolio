@@ -269,11 +269,9 @@ function Proyect() {
                     gallery: Array.isArray(d.Galery) ? d.Galery : [],
                     start: d.Start ?? "",
                     end: d.End ?? "",
-                    challenge: d.Challenge ?? "",
                     client: d.Client ?? "",
                     industry: d.Industry ?? "",
                     position: d.Possition ?? "",
-                    gallery: Array.isArray(d.Galery) ? d.Galery : [],
                 }
             })
 
